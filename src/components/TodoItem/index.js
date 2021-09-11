@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCheck, faEdit, faSave, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faBackspace, faCheck, faEdit, faSave, faTrash} from "@fortawesome/free-solid-svg-icons";
 
-const TodoItem = ({item, deleteTodo, doneTodo, saveTodo}) => {
+const TodoItem = ({item, deleteTodo, doneTodo, saveTodo, backspace}) => {
     const [isEdit, setIsEdit] = useState(false)
     const [newTitle, setNewTitle] = useState(item.title)
     const handleEdit = () => {
@@ -14,7 +14,6 @@ const TodoItem = ({item, deleteTodo, doneTodo, saveTodo}) => {
     const handleSave = () => {
         saveTodo(item.id, newTitle)
         setIsEdit(false)
-
     }
 
 
@@ -34,9 +33,12 @@ const TodoItem = ({item, deleteTodo, doneTodo, saveTodo}) => {
                         isEdit ? <FontAwesomeIcon icon={faSave}/> : <FontAwesomeIcon icon={faEdit}/>
                     }
                 </button>
-                <button type="button" onClick={() => deleteTodo(item.id)}
+                <button type="button" onClick={ () => deleteTodo(item.id)} // isEdit? () => backspace(item.id, item.title) :
                         className="btn btn-outline-danger btn-sm">
-                    <FontAwesomeIcon icon={faTrash}/>
+                    {
+                       isEdit ? <FontAwesomeIcon icon={faBackspace} /> : <FontAwesomeIcon icon={faTrash}/>
+                    }
+
                 </button>
             </div>
         </li>

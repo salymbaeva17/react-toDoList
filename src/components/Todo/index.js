@@ -53,10 +53,14 @@ const Todo = () => {
                 setTodos(todos.filter(item => item.id !== id))
             })
     }
-
+    //
+    // const backspace = (id, title) => {
+    //     axios.put(`https://613ae97d110e000017a453d0.mockapi.io/todos/${id}`, {title})
+    //         .then(({data}) => setTodos(todos.map(item => item.title &&  item.id === id ? title.slice(-2, -1) : data)))
+    // }
 
     const saveTodo = (id, title) => {
-        axios.put(`https://613ae97d110e000017a453d0.mockapi.io/todos/${id}`, {title: title})
+        axios.put(`https://613ae97d110e000017a453d0.mockapi.io/todos/${id}`, {title})
             .then(({data}) =>  setTodos(todos.map(item => item.id === id ? data : item)))
 
 
@@ -79,7 +83,7 @@ const Todo = () => {
                 <ul className="list-group">
                     {
                         todos.map(item =>
-                            <TodoItem  key={item.id} doneTodo={doneTodo} item={item} saveTodo={saveTodo} deleteTodo={deleteTodo}/>
+                            <TodoItem  key={item.id} doneTodo={doneTodo}  item={item} saveTodo={saveTodo} deleteTodo={deleteTodo}/>  // backspace={backspace}
                         )
                     }
                 </ul>
