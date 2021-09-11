@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {nanoid} from "nanoid";
 import TodoItem from "../TodoItem";
 import TodoHeader from "../TodoHeader";
 import axios from "axios";
@@ -31,7 +30,7 @@ const Todo = () => {
     }
     const addTodo = () => {
         const newTodo = {
-            id: nanoid(),  // todos[todos.length] ? todos[todos.length - 1].id + 1 : 1,
+            id: todos[todos.length] ? todos[todos.length - 1].id + 1 : 1,
             title: value,
             createdAt: +new Date()
         }
@@ -50,7 +49,7 @@ const Todo = () => {
     const deleteTodo = (id) => {
         axios.delete(`https://613ae97d110e000017a453d0.mockapi.io/todos/${id}`)
             .then(({data}) => {
-                setTodos(todos.filter(item => item.id !== id))
+                setTodos(todos.filter(item => item.id ? item.id !== id : data))
             })
     }
     //
